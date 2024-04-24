@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "prettier-format": "npx prettier src/**/.html src/**/*.css src/**/*.scss src/**/*.ts --write"
+    "prettier-format": "npx prettier 'src/**/*.{html,css,scss,ts}' --write"
   },
   "private": true,
   "dependencies": {
