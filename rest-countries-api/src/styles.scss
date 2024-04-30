@@ -26,6 +26,11 @@ body {
   font-weight: 300;
   font-family: NunitoSans;
   font-size: 1.125rem;
+  min-height: 100vh;
+}
+
+html {
+  height: 100%;
 }
 
 * {
