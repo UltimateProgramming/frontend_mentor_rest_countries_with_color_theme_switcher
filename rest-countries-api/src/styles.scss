@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
   font-family: NunitoSans;
-  src: url(/rest-countries-api/src/assets/NunitoSans-VariableFont_YTLC\,opsz\,wdth\,wght.ttf);
+  src: url(/assets/NunitoSans-VariableFont_YTLC\,opsz\,wdth\,wght.ttf);
 }
 
 :root {
@@ -10,4 +10,24 @@
   --very-dark-blue-text: hsl(200, 15%, 8%);
   --dark-gray: hsl(0, 0%, 52%) --very-light-gray: hsl(0, 0%, 98%);
   --white: hsl(0, 0%, 100%);
+}
+
+.font-weight-600 {
+  font-weight: 600;
+}
+
+.font-weight-800 {
+  font-weight: 800;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+  font-family: NunitoSans;
+  font-size: 1.125rem;
+}
+
+* {
+  box-sizing: border-box;
 }

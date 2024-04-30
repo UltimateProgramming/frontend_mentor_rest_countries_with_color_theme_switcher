@@ -1,0 +1,14 @@
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  box-shadow: 0 4px 2px -2px lightgray;
+  width: 100%;
+}
+
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
