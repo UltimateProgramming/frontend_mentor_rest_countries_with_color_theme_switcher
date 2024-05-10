@@ -1,5 +1,13 @@
 <div class="filter-container">
-  <select name="test" id="test" class="selector">
+  <select
+    *ngIf="regions$ | async as regions"
+    name="test"
+    id="test"
+    class="selector"
+  >
     <option value="0" hidden>Filter by Region</option>
+    <option *ngFor="let region of regions" [value]="region.region">
+      {{ region.region }}
+    </option>
   </select>
 </div>
