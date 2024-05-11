@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { RegionService } from '../../../core/services/region/region.service'
+import { CountryService } from '../../../core/services/country/country.service'
 
 @Component({
   selector: 'app-filter',
@@ -7,7 +7,7 @@ import { RegionService } from '../../../core/services/region/region.service'
   styleUrl: './filter.component.scss',
 })
 export class FilterComponent {
-  public regions$ = this.regionService.allRegions$
+  public regions$ = this.countryService.allRegions$
 
-  constructor(private regionService: RegionService) {}
+  constructor(private countryService: CountryService) {}
 }

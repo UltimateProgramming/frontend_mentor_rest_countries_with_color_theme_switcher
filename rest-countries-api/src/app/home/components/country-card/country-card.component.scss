@@ -1,0 +1,13 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  box-shadow: 1px 1px 5px var(--dark-gray);
+  border-radius: 0.5rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}

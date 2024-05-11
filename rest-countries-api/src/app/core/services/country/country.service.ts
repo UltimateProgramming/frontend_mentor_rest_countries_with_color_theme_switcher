@@ -2,20 +2,27 @@ import { Injectable } from '@angular/core'
 import { RestService } from '../rest/rest.service'
 import { ApiRoutes } from '../../../util/api-routes'
 import { Region } from '../../models/region'
-import { distinct, map, shareReplay } from 'rxjs'
+import { map, share } from 'rxjs'
+import { CountryCard } from '../../models/country-card'
 
 @Injectable({
   providedIn: 'root',
 })
-export class RegionService {
+export class CountryService {
   allRegions$ = this.restService
     .get<Region[]>(ApiRoutes.all, {
       params: { fields: 'region' },
     })
     .pipe(
       map((regions) => this.makeDistinctRegions(regions)),
-      shareReplay(1)
+      share()
     )
+
+  allCountries$ = this.restService
+    .get<CountryCard[]>(ApiRoutes.all, {
+      params: { fields: 'nativeName,population,region,capital,flags' },
+    })
+    .pipe(share())
 
   constructor(private restService: RestService) {}
 

@@ -1,13 +1,13 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RestService } from './services/rest/rest.service'
-import { RegionService } from './services/region/region.service'
+import { CountryService } from './services/country/country.service'
 import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [],
   imports: [CommonModule, HttpClientModule],
-  providers: [RestService, RegionService],
+  providers: [RestService, CountryService],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
