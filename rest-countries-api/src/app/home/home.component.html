@@ -1,7 +1,7 @@
 <div class="home-container">
   <app-search></app-search>
-  <app-filter></app-filter>
-  <div *ngFor="let country of allCountries$ | async">
+  <app-filter [regionFormControl]="regionFilter"></app-filter>
+  <div *ngFor="let country of filteredCountries$ | async">
     <app-country-card [country]="country"></app-country-card>
   </div>
 </div>

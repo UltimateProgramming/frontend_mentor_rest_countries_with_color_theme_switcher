@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core'
 import { RestService } from '../rest/rest.service'
 import { ApiRoutes } from '../../../util/api-routes'
 import { Region } from '../../models/region'
-import { map, share } from 'rxjs'
+import { Observable, map, share } from 'rxjs'
 import { CountryCard } from '../../models/country-card'
 
 @Injectable({
   providedIn: 'root',
 })
 export class CountryService {
-  allRegions$ = this.restService
+  public allRegions$ = this.restService
     .get<Region[]>(ApiRoutes.all, {
       params: { fields: 'region' },
     })
@@ -18,13 +18,22 @@ export class CountryService {
       share()
     )
 
-  allCountries$ = this.restService
+  public allCountries$ = this.restService
     .get<CountryCard[]>(ApiRoutes.all, {
       params: { fields: 'nativeName,population,region,capital,flags' },
     })
     .pipe(share())
 
   constructor(private restService: RestService) {}
+
+  public getCountriesFilteredByRegion(
+    region: string
+  ): Observable<CountryCard[]> {
+    return this.restService.get<CountryCard[]>(
+      ApiRoutes.region.replace('{region}', region),
+      { params: { fields: 'nativeName,population,capital,flags' } }
+    )
+  }
 
   private makeDistinctRegions(regions: Region[]): Region[] {
     const regionNames = regions.map((region) => region.region)
