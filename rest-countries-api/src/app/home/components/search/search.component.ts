@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { FormControl } from '@angular/forms'
 
 @Component({
@@ -7,5 +7,5 @@ import { FormControl } from '@angular/forms'
   styleUrl: './search.component.scss',
 })
 export class SearchComponent {
-  public search = new FormControl('')
+  @Input() public search = new FormControl('')
 }

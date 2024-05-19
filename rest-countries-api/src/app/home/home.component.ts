@@ -1,7 +1,14 @@
 import { Component } from '@angular/core'
 import { CountryService } from '../core/services/country/country.service'
 import { FormControl } from '@angular/forms'
-import { Observable, startWith, switchMap } from 'rxjs'
+import {
+  Observable,
+  combineLatest,
+  debounceTime,
+  distinctUntilChanged,
+  startWith,
+  switchMap,
+} from 'rxjs'
 import { CountryCard } from '../core/models/country-card'
 
 @Component({
@@ -13,17 +20,27 @@ export class HomeComponent {
   private initValue = 'init_value'
 
   public regionFilter = new FormControl(this.initValue)
-  public filteredCountries$: Observable<CountryCard[]> =
-    this.regionFilter.valueChanges.pipe(
-      startWith(this.initValue),
-      switchMap((value) => {
-        if (value === this.initValue) {
-          return this.countryService.allCountries$
-        }
+  public search = new FormControl('')
 
-        return this.countryService.getCountriesFilteredByRegion(value as string)
-      })
-    )
+  public filteredCountries$: Observable<CountryCard[]> = combineLatest([
+    this.search.valueChanges.pipe(
+      distinctUntilChanged(),
+      debounceTime(400),
+      startWith('')
+    ),
+    this.regionFilter.valueChanges.pipe(startWith(this.initValue)),
+  ]).pipe(
+    switchMap(([search, filter]) => {
+      if (search) {
+        return this.countryService.getCountriesByName(search)
+      }
+      if (filter === this.initValue) {
+        return this.countryService.allCountries$
+      }
+
+      return this.countryService.getCountriesFilteredByRegion(filter as string)
+    })
+  )
 
   constructor(private countryService: CountryService) {}
 }

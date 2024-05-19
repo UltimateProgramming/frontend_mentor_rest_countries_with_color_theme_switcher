@@ -20,7 +20,7 @@ export class CountryService {
 
   public allCountries$ = this.restService
     .get<CountryCard[]>(ApiRoutes.all, {
-      params: { fields: 'nativeName,population,region,capital,flags' },
+      params: { fields: 'name,population,region,capital,flags' },
     })
     .pipe(share())
 
@@ -31,7 +31,18 @@ export class CountryService {
   ): Observable<CountryCard[]> {
     return this.restService.get<CountryCard[]>(
       ApiRoutes.region.replace('{region}', region),
-      { params: { fields: 'nativeName,population,capital,flags' } }
+      { params: { fields: 'name,population,capital,flags' } }
+    )
+  }
+
+  public getCountriesByName(name: string): Observable<CountryCard[]> {
+    return this.restService.get<CountryCard[]>(
+      ApiRoutes.name.replace('{name}', name),
+      {
+        params: {
+          fields: 'name,population,capital,flags',
+        },
+      }
     )
   }
 

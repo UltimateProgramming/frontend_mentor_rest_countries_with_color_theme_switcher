@@ -1,7 +1,8 @@
 import { Flag } from './flag'
+import { Name } from './name'
 
 export interface CountryCard {
-  name: string
+  name: Name
   flags: Flag
   population: number
   region: string
