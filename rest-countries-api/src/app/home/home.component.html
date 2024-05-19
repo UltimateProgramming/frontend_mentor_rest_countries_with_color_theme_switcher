@@ -1,7 +1,18 @@
 <div class="home-container">
   <app-search [search]="search"></app-search>
   <app-filter [regionFormControl]="regionFilter"></app-filter>
-  <div *ngFor="let country of filteredCountries$ | async">
-    <app-country-card [country]="country"></app-country-card>
-  </div>
+  <ng-container
+    *ngIf="filteredCountries$ | async; let countries; else: noCountries"
+  >
+    <ng-container *ngIf="countries.length > 0; else noCountries">
+      <app-country-card
+        *ngFor="let country of countries"
+        [country]="country"
+      ></app-country-card>
+    </ng-container>
+  </ng-container>
 </div>
+
+<ng-template #noCountries>
+  <p>No countries found</p>
+</ng-template>

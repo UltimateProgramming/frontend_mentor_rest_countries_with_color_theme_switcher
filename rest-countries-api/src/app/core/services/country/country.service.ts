@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { RestService } from '../rest/rest.service'
 import { ApiRoutes } from '../../../util/api-routes'
 import { Region } from '../../models/region'
-import { Observable, map, share } from 'rxjs'
+import { Observable, catchError, map, of, share } from 'rxjs'
 import { CountryCard } from '../../models/country-card'
 
 @Injectable({
@@ -22,28 +22,40 @@ export class CountryService {
     .get<CountryCard[]>(ApiRoutes.all, {
       params: { fields: 'name,population,region,capital,flags' },
     })
-    .pipe(share())
+    .pipe(
+      catchError(() => {
+        return of([])
+      })
+    )
 
   constructor(private restService: RestService) {}
 
   public getCountriesFilteredByRegion(
     region: string
   ): Observable<CountryCard[]> {
-    return this.restService.get<CountryCard[]>(
-      ApiRoutes.region.replace('{region}', region),
-      { params: { fields: 'name,population,capital,flags' } }
-    )
+    return this.restService
+      .get<
+        CountryCard[]
+      >(ApiRoutes.region.replace('{region}', region), { params: { fields: 'name,population,capital,flags' } })
+      .pipe(
+        catchError(() => {
+          return of([])
+        })
+      )
   }
 
   public getCountriesByName(name: string): Observable<CountryCard[]> {
-    return this.restService.get<CountryCard[]>(
-      ApiRoutes.name.replace('{name}', name),
-      {
+    return this.restService
+      .get<CountryCard[]>(ApiRoutes.name.replace('{name}', name), {
         params: {
           fields: 'name,population,capital,flags',
         },
-      }
-    )
+      })
+      .pipe(
+        catchError(() => {
+          return of([])
+        })
+      )
   }
 
   private makeDistinctRegions(regions: Region[]): Region[] {
