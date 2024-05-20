@@ -3,4 +3,39 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+  }
+
+  .country {
+    min-width: 20rem;
+    max-width: 20rem;
+    min-height: 30rem;
+    max-height: 30rem;
+  }
+}
+
+@media (min-width: 375px) {
+  .home-container {
+    .controls {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .cards {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .country {
+      max-width: 20rem;
+    }
+  }
 }

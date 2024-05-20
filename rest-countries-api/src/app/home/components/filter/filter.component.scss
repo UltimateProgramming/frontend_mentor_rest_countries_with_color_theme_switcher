@@ -10,3 +10,9 @@
     border-radius: 0.5rem;
   }
 }
+
+@media (min-width: 375px) {
+  .filter-container {
+    width: 100%;
+  }
+}

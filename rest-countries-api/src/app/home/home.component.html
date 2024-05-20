@@ -1,16 +1,20 @@
 <div class="home-container">
-  <app-search [search]="search"></app-search>
-  <app-filter [regionFormControl]="regionFilter"></app-filter>
-  <ng-container
+  <div class="controls">
+    <app-search [search]="search"></app-search>
+    <app-filter [regionFormControl]="regionFilter"></app-filter>
+  </div>
+  <div
+    class="cards"
     *ngIf="filteredCountries$ | async; let countries; else: noCountries"
   >
     <ng-container *ngIf="countries.length > 0; else noCountries">
       <app-country-card
+        class="country"
         *ngFor="let country of countries"
         [country]="country"
       ></app-country-card>
     </ng-container>
-  </ng-container>
+  </div>
 </div>
 
 <ng-template #noCountries>
