@@ -20,7 +20,7 @@ export class CountryService {
 
   public allCountries$ = this.restService
     .get<CountryCard[]>(ApiRoutes.all, {
-      params: { fields: 'name,population,region,capital,flags' },
+      params: { fields: 'cca3,name,population,region,capital,flags' },
     })
     .pipe(
       catchError(() => {
@@ -36,7 +36,7 @@ export class CountryService {
     return this.restService
       .get<
         CountryCard[]
-      >(ApiRoutes.region.replace('{region}', region), { params: { fields: 'name,population,capital,flags' } })
+      >(ApiRoutes.region.replace('{region}', region), { params: { fields: 'cca3,name,population,capital,flags' } })
       .pipe(
         catchError(() => {
           return of([])
@@ -48,7 +48,7 @@ export class CountryService {
     return this.restService
       .get<CountryCard[]>(ApiRoutes.name.replace('{name}', name), {
         params: {
-          fields: 'name,population,capital,flags',
+          fields: 'cca3,name,population,capital,flags',
         },
       })
       .pipe(

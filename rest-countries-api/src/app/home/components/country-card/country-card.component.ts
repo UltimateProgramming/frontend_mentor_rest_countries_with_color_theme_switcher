@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core'
 import { CountryCard } from '../../../core/models/country-card'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-country-card',
@@ -9,5 +10,9 @@ import { CountryCard } from '../../../core/models/country-card'
 export class CountryCardComponent {
   @Input({ required: true }) public country: CountryCard
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+  public onCountryCardClick(countryCode: string) {
+    this.router.navigate(['/details', countryCode])
+  }
 }
