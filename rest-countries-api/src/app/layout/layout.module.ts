@@ -6,6 +6,7 @@ import { TopNavComponent } from './components/top-nav/top-nav.component'
 import { RouterModule } from '@angular/router'
 import { routes } from './layout.routes'
 import { HomeModule } from '../home/home.module'
+import { DetailsModule } from '../details/details.module'
 
 @NgModule({
   declarations: [LayoutComponent, TopNavComponent],
@@ -15,6 +16,7 @@ import { HomeModule } from '../home/home.module'
     BrowserModule,
     RouterModule.forRoot(routes),
     HomeModule,
+    DetailsModule,
   ],
 })
 export class LayoutModule {}

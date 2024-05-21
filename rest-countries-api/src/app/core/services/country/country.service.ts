@@ -4,6 +4,7 @@ import { ApiRoutes } from '../../../util/api-routes'
 import { Region } from '../../models/region'
 import { Observable, catchError, map, of, share } from 'rxjs'
 import { CountryCard } from '../../models/country-card'
+import { Country } from '../../models/country'
 
 @Injectable({
   providedIn: 'root',
@@ -54,6 +55,20 @@ export class CountryService {
       .pipe(
         catchError(() => {
           return of([])
+        })
+      )
+  }
+
+  public getCountryByCCA3(cca3: string): Observable<Country> {
+    return this.restService
+      .get<Country>(ApiRoutes.alpha.replace('{code}', cca3), {
+        params: {
+          fields: 'name,population,region,subregion,capital,tld,currencies',
+        },
+      })
+      .pipe(
+        catchError(() => {
+          return of({} as Country)
         })
       )
   }
