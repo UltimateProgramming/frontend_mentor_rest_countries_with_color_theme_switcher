@@ -1,3 +1,6 @@
-<div *ngIf="country$ | async as country">
-  <p>{{ country.name.official }}</p>
+<div class="details-container">
+  <app-back-button></app-back-button>
+  <div *ngIf="country$ | async as country">
+    <p>{{ country.name.official }}</p>
+  </div>
 </div>

@@ -8,4 +8,5 @@ export interface Country {
   capital: string
   tld: string
   currencies: object
+  borders: string[]
 }

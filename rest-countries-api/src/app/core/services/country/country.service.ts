@@ -63,7 +63,8 @@ export class CountryService {
     return this.restService
       .get<Country>(ApiRoutes.alpha.replace('{code}', cca3), {
         params: {
-          fields: 'name,population,region,subregion,capital,tld,currencies',
+          fields:
+            'name,population,region,subregion,capital,tld,currencies,borders',
         },
       })
       .pipe(
