@@ -1,6 +1,31 @@
 <div class="details-container">
   <app-back-button></app-back-button>
   <div *ngIf="country$ | async as country">
-    <p>{{ country.name.official }}</p>
+    <img class="flag" [src]="country.flags.svg" />
+    <div class="country-info">
+      <h1>{{ country.name.official }}</h1>
+      <app-key-value
+        key="Population:"
+        [value]="(country.population | number: '2.')!"
+      ></app-key-value>
+      <app-key-value key="Region:" [value]="country.region"></app-key-value>
+      <app-key-value
+        key="Sub Region:"
+        [value]="country.subregion"
+      ></app-key-value>
+      <app-key-value key="Capital" [value]="country.capital"></app-key-value>
+      <app-key-value
+        key="Top Level Domain:"
+        [value]="country.tld"
+      ></app-key-value>
+      <app-key-value
+        key="Currencies:"
+        [value]="getCurrencies(country.currencies)"
+      ></app-key-value>
+      <app-key-value
+        key="Languages:"
+        [value]="getLanguages(country.languages)"
+      ></app-key-value>
+    </div>
   </div>
 </div>

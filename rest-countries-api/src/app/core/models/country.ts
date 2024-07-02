@@ -1,3 +1,4 @@
+import { Flag } from './flag'
 import { Name } from './name'
 
 export interface Country {
@@ -9,4 +10,6 @@ export interface Country {
   tld: string
   currencies: object
   borders: string[]
+  flags: Flag
+  languages: object
 }

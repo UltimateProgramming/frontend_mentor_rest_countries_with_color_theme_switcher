@@ -1,0 +1,9 @@
+.key-value {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+
+  p {
+    font-weight: 600;
+  }
+}
