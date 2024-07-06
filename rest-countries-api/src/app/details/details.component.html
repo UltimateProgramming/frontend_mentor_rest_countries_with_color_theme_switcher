@@ -1,5 +1,6 @@
 <div class="details-container">
   <app-button
+    class="back-btn"
     iconSource="fa-solid fa-arrow-left-long"
     text="Back"
     (clickEmitter)="router.navigate(['/home']).then()"
@@ -37,12 +38,12 @@
       <div>
         <h3>Border Countries:</h3>
         <div class="border-wrapper">
-          <button
+          <app-button
             class="border-country-btn"
             *ngFor="let borderCountry of country.borders"
+            [text]="borderCountry"
           >
-            {{ borderCountry }}
-          </button>
+          </app-button>
         </div>
       </div>
     </div>

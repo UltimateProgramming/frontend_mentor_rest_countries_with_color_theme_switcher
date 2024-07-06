@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { CountryService } from '../core/services/country/country.service'
 import { getCurrenciesFromObject } from '../util/currency-helper'
 import { getLanguages } from '../util/language-helper'
+import { tap } from 'rxjs'
 
 @Component({
   selector: 'app-details',

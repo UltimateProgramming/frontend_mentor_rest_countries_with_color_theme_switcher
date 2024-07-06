@@ -2,9 +2,18 @@ import { Injectable } from '@angular/core'
 import { RestService } from '../rest/rest.service'
 import { ApiRoutes } from '../../../util/api-routes'
 import { Region } from '../../models/region'
-import { Observable, catchError, map, of, share } from 'rxjs'
+import {
+  Observable,
+  catchError,
+  forkJoin,
+  map,
+  of,
+  share,
+  switchMap,
+} from 'rxjs'
 import { CountryCard } from '../../models/country-card'
 import { Country } from '../../models/country'
+import { NameResponse } from '../../models/name-response'
 
 @Injectable({
   providedIn: 'root',
@@ -68,6 +77,24 @@ export class CountryService {
         },
       })
       .pipe(
+        switchMap((country) =>
+          forkJoin(
+            country.borders.map((border) =>
+              this.restService.get<NameResponse>(
+                ApiRoutes.alpha.replace('{code}', border),
+                { params: { fields: 'name' } }
+              )
+            )
+          ).pipe(
+            map(
+              (names) =>
+                ({
+                  ...country,
+                  borders: names.map((name) => name.name.common),
+                }) as Country
+            )
+          )
+        ),
         catchError(() => {
           return of({} as Country)
         })
