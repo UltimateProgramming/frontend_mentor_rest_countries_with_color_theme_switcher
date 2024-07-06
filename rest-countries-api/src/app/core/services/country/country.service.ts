@@ -14,6 +14,7 @@ import {
 import { CountryCard } from '../../models/country-card'
 import { Country } from '../../models/country'
 import { NameResponse } from '../../models/name-response'
+import { CountryExtension } from '../../models/country-extension'
 
 @Injectable({
   providedIn: 'root',
@@ -68,7 +69,7 @@ export class CountryService {
       )
   }
 
-  public getCountryByCCA3(cca3: string): Observable<Country> {
+  public getCountryByCCA3(cca3: string): Observable<CountryExtension> {
     return this.restService
       .get<Country>(ApiRoutes.alpha.replace('{code}', cca3), {
         params: {
@@ -86,17 +87,25 @@ export class CountryService {
               )
             )
           ).pipe(
-            map(
-              (names) =>
-                ({
-                  ...country,
-                  borders: names.map((name) => name.name.common),
-                }) as Country
-            )
+            map((names) => {
+              let countryExtension: CountryExtension = {
+                ...country,
+                borderObjects: [],
+              }
+              let formattedNames = names.map((name) => name.name.common)
+              for (let i = 0; i < formattedNames.length; i++) {
+                countryExtension.borderObjects.push({
+                  code: country.borders[i],
+                  name: formattedNames[i],
+                })
+              }
+
+              return countryExtension
+            })
           )
         ),
         catchError(() => {
-          return of({} as Country)
+          return of({} as CountryExtension)
         })
       )
   }

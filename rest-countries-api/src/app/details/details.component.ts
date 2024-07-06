@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { CountryService } from '../core/services/country/country.service'
 import { getCurrenciesFromObject } from '../util/currency-helper'
 import { getLanguages } from '../util/language-helper'
-import { tap } from 'rxjs'
+import { switchMap } from 'rxjs'
 
 @Component({
   selector: 'app-details',
@@ -11,8 +11,10 @@ import { tap } from 'rxjs'
   styleUrl: './details.component.scss',
 })
 export class DetailsComponent {
-  public country$ = this.countryService.getCountryByCCA3(
-    this.activedRoute.snapshot.paramMap.get('code')!
+  public country$ = this.activedRoute.paramMap.pipe(
+    switchMap((param) =>
+      this.countryService.getCountryByCCA3(param.get('code')!)
+    )
   )
 
   constructor(
@@ -27,5 +29,9 @@ export class DetailsComponent {
 
   public getLanguages(languages: object): string {
     return getLanguages(languages)
+  }
+
+  public clickOnBorderCountry(borderCountryCode: string) {
+    this.router.navigate([`details/${borderCountryCode}`])
   }
 }

@@ -3,7 +3,7 @@
     class="back-btn"
     iconSource="fa-solid fa-arrow-left-long"
     text="Back"
-    (clickEmitter)="router.navigate(['/home']).then()"
+    (clickEmitter)="router.navigate(['/home'])"
   ></app-button>
   <div *ngIf="country$ | async as country">
     <img class="flag" [src]="country.flags.svg" />
@@ -40,8 +40,9 @@
         <div class="border-wrapper">
           <app-button
             class="border-country-btn"
-            *ngFor="let borderCountry of country.borders"
-            [text]="borderCountry"
+            *ngFor="let borderCountry of country.borderObjects"
+            [text]="borderCountry.name"
+            (clickEmitter)="clickOnBorderCountry(borderCountry.code)"
           >
           </app-button>
         </div>
