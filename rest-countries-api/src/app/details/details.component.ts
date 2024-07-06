@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { CountryService } from '../core/services/country/country.service'
 import { getCurrenciesFromObject } from '../util/currency-helper'
 import { getLanguages } from '../util/language-helper'
@@ -15,6 +15,7 @@ export class DetailsComponent {
   )
 
   constructor(
+    public router: Router,
     private countryService: CountryService,
     private activedRoute: ActivatedRoute
   ) {}

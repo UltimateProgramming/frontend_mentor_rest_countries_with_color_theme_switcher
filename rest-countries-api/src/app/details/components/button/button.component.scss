@@ -4,6 +4,8 @@ button {
   font-size: large;
   padding: 0.75rem 2.5rem 0.75rem 2.5rem;
   border-radius: 0.5rem;
+  width: inherit;
+  height: inherit;
 
   &:hover {
     cursor: pointer;
