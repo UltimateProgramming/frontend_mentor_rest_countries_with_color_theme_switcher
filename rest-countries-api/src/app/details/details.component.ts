@@ -11,7 +11,7 @@ import { switchMap } from 'rxjs'
   styleUrl: './details.component.scss',
 })
 export class DetailsComponent {
-  public country$ = this.activedRoute.paramMap.pipe(
+  public country$ = this.activatedRoute.paramMap.pipe(
     switchMap((param) =>
       this.countryService.getCountryByCCA3(param.get('code')!)
     )
@@ -20,7 +20,7 @@ export class DetailsComponent {
   constructor(
     public router: Router,
     private countryService: CountryService,
-    private activedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute
   ) {}
 
   public getCurrencies(currencies: object): string {
